@@ -1,6 +1,11 @@
+streamlit
 langchain
 langchain-core
 langchain-community
 langchain-google-genai
-dotenv
+google-generativeai
+requests
+python-dotenv
+tenacity
+pydantic
 -e .
