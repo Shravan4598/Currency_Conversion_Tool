@@ -1,23 +1,24 @@
 """
-Configuration module for the AI Currency Converter application.
+Configuration module for the AI Currency Converter.
 
-This module centralizes all application configuration, environment
-variables, API endpoints, model configuration, and application constants.
+This module centralizes all application configuration,
+environment variables, model settings, API configuration,
+and application constants.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import os
 
 from dotenv import load_dotenv
 
-# Load environment variables from .env
+# Load environment variables
 load_dotenv()
 
 
 @dataclass(frozen=True)
 class EnvironmentConfig:
     """
-    Stores all environment variables required by the application.
+    Environment variables.
     """
 
     exchange_rate_url: str = os.getenv("EXCHANGE_RATE_URL", "")
@@ -28,21 +29,21 @@ class EnvironmentConfig:
 @dataclass(frozen=True)
 class ModelConfig:
     """
-    Configuration for the Gemini model.
+    Gemini model configuration.
     """
 
-    model_name: str = "gemini-2.5-flash"
+    model_name: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
     temperature: float = 0.2
 
 
 @dataclass(frozen=True)
 class APIConfig:
     """
-    API request configuration.
+    API configuration.
     """
 
-    request_timeout: int = 30
-    max_retries: int = 3
+    request_timeout: int = int(os.getenv("REQUEST_TIMEOUT", "30"))
+    max_retries: int = int(os.getenv("MAX_RETRIES", "3"))
 
 
 @dataclass(frozen=True)
@@ -53,17 +54,44 @@ class AppConfig:
 
     app_title: str = "💱 AI Currency Converter"
     app_icon: str = "💱"
-
-    default_source_currency: str = "USD"
-    default_target_currency: str = "INR"
-
     page_layout: str = "centered"
+
+    default_source_currency: str = os.getenv(
+        "DEFAULT_SOURCE_CURRENCY",
+        "USD",
+    )
+
+    default_target_currency: str = os.getenv(
+        "DEFAULT_TARGET_CURRENCY",
+        "INR",
+    )
+
+    supported_currencies: list[str] = field(
+        default_factory=lambda: [
+            "USD",
+            "INR",
+            "EUR",
+            "GBP",
+            "JPY",
+            "AUD",
+            "CAD",
+            "CHF",
+            "CNY",
+            "SGD",
+            "NZD",
+            "AED",
+            "SAR",
+            "PKR",
+            "BDT",
+            "NPR",
+        ]
+    )
 
 
 @dataclass(frozen=True)
 class PromptConfig:
     """
-    Prompt-related configuration.
+    Prompt configuration.
     """
 
     max_response_tokens: int = 512
@@ -73,12 +101,13 @@ class Config:
     """
     Central configuration object.
 
-    Usage:
+    Example:
         from src.config import config
 
         config.env.exchange_rate_url
         config.model.model_name
         config.api.request_timeout
+        config.app.supported_currencies
     """
 
     env = EnvironmentConfig()
