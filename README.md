@@ -191,7 +191,7 @@ AI-Currency-Converter/
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/USERNAME/REPOSITORY.git
+git clone https://github.com/Shravan4598/Currency_Conversion_Tool.git
 ```
 
 ```bash
