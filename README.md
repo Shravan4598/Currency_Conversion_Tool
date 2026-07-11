@@ -283,7 +283,7 @@ To : INR
 
 ### AI Explanation
 
-> Based on the latest exchange rate, **100 US Dollars** is approximately **8,650 Indian Rupees**. The conversion reflects the current market exchange rate retrieved in real time from the Exchange Rate API.
+> Based on the latest exchange rate, **100 US Dollars** is approximately **9,547.67 Indian Rupees**. The conversion reflects the current market exchange rate retrieved in real time from the Exchange Rate API.
 
 ---
 
